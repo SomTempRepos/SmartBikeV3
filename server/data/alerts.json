@@ -1,0 +1,47 @@
+[
+  {
+    "id": "alert_1754199332692_BIKE001",
+    "bikeId": "BIKE001",
+    "type": "fence_breach",
+    "message": "Bike BIKE001 has left the geo-fence area",
+    "distance": "2.44",
+    "geofenceId": "fence_1754199332427",
+    "location": {
+      "lat": 19.07352064558069,
+      "lng": 72.8759000683417
+    },
+    "timestamp": "2025-08-03T05:35:32.692Z",
+    "status": "active",
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1754140867595_BIKE001",
+    "bikeId": "BIKE001",
+    "type": "fence_breach",
+    "message": "Bike BIKE001 has left the geo-fence area",
+    "distance": "2.42",
+    "geofenceId": "fence_1754140845777",
+    "location": {
+      "lat": 19.074055303975836,
+      "lng": 72.88016019405683
+    },
+    "timestamp": "2025-08-02T13:21:07.595Z",
+    "status": "active",
+    "acknowledged": false
+  },
+  {
+    "id": "alert_1754140566563_BIKE001",
+    "bikeId": "BIKE001",
+    "type": "fence_breach",
+    "message": "Bike BIKE001 has left the geo-fence area",
+    "distance": "6.74",
+    "geofenceId": "fence_1754140565706",
+    "location": {
+      "lat": 19.07503048607489,
+      "lng": 72.87943127552892
+    },
+    "timestamp": "2025-08-02T13:16:06.563Z",
+    "status": "active",
+    "acknowledged": false
+  }
+]

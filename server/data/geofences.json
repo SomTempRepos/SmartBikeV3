@@ -1,0 +1,266 @@
+[
+  {
+    "id": "fence_1754138854633",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.076,
+      "lng": 72.8777
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:47:34.633Z",
+    "updatedAt": "2025-08-02T12:47:34.633Z"
+  },
+  {
+    "id": "fence_1754138867632",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.11646035674646,
+      "lng": 72.88992474837966
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:47:47.632Z",
+    "updatedAt": "2025-08-02T12:47:47.632Z"
+  },
+  {
+    "id": "fence_1754138903405",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:48:23.405Z",
+    "updatedAt": "2025-08-02T12:48:23.405Z"
+  },
+  {
+    "id": "fence_1754138930355",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 0.1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:48:50.355Z",
+    "updatedAt": "2025-08-02T12:48:50.355Z"
+  },
+  {
+    "id": "fence_1754139015780",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:50:15.780Z",
+    "updatedAt": "2025-08-02T12:50:15.780Z"
+  },
+  {
+    "id": "fence_1754139274825",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:54:34.825Z",
+    "updatedAt": "2025-08-02T12:54:34.825Z"
+  },
+  {
+    "id": "fence_1754139278039",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:54:38.039Z",
+    "updatedAt": "2025-08-02T12:54:38.039Z"
+  },
+  {
+    "id": "fence_1754139296851",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.13867554006192,
+      "lng": 72.90382833692293
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T12:54:56.851Z",
+    "updatedAt": "2025-08-02T12:54:56.851Z"
+  },
+  {
+    "id": "fence_1754139942011",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.076,
+      "lng": 72.8777
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:05:42.011Z",
+    "updatedAt": "2025-08-02T13:05:42.011Z"
+  },
+  {
+    "id": "fence_1754139969008",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.093053357459965,
+      "lng": 72.89120222944231
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:06:09.008Z",
+    "updatedAt": "2025-08-02T13:06:09.008Z"
+  },
+  {
+    "id": "fence_1754140000943",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.100137477154387,
+      "lng": 72.90751263628484
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:06:40.943Z",
+    "updatedAt": "2025-08-02T13:06:40.943Z"
+  },
+  {
+    "id": "fence_1754140146258",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.11300356015593,
+      "lng": 72.92948583318349
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:09:06.258Z",
+    "updatedAt": "2025-08-02T13:09:06.258Z"
+  },
+  {
+    "id": "fence_1754140341121",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.11300356015593,
+      "lng": 72.92948583318349
+    },
+    "radius": 0.01,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:12:21.121Z",
+    "updatedAt": "2025-08-02T13:12:21.121Z"
+  },
+  {
+    "id": "fence_1754140565706",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.11300356015593,
+      "lng": 72.92948583318349
+    },
+    "radius": 0.01,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:16:05.706Z",
+    "updatedAt": "2025-08-02T13:16:05.706Z"
+  },
+  {
+    "id": "fence_1754140782752",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.11300356015593,
+      "lng": 72.92948583318349
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:19:42.753Z",
+    "updatedAt": "2025-08-02T13:19:42.753Z"
+  },
+  {
+    "id": "fence_1754140789305",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.079275629934966,
+      "lng": 72.88362712127469
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:19:49.305Z",
+    "updatedAt": "2025-08-02T13:19:49.305Z"
+  },
+  {
+    "id": "fence_1754140845777",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.076363211621988,
+      "lng": 72.90307147986859
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-02T13:20:45.777Z",
+    "updatedAt": "2025-08-02T13:20:45.777Z"
+  },
+  {
+    "id": "fence_1754195280314",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.0774138150533,
+      "lng": 72.88322237866
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-03T04:28:00.314Z",
+    "updatedAt": "2025-08-03T04:28:00.314Z"
+  },
+  {
+    "id": "fence_1754196568664",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.0774138150533,
+      "lng": 72.88322237866
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-03T04:49:28.664Z",
+    "updatedAt": "2025-08-03T04:49:28.664Z"
+  },
+  {
+    "id": "fence_1754199323805",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.0774138150533,
+      "lng": 72.88322237866
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-03T05:35:23.805Z",
+    "updatedAt": "2025-08-03T05:35:23.805Z"
+  },
+  {
+    "id": "fence_1754199332427",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.09422992195016,
+      "lng": 72.88352690482971
+    },
+    "radius": 1,
+    "isActive": false,
+    "createdAt": "2025-08-03T05:35:32.428Z",
+    "updatedAt": "2025-08-03T05:35:32.428Z"
+  },
+  {
+    "id": "fence_1754199351307",
+    "name": "Main Geofence",
+    "baseLocation": {
+      "lat": 19.078147626175593,
+      "lng": 72.88268435786324
+    },
+    "radius": 1,
+    "isActive": true,
+    "createdAt": "2025-08-03T05:35:51.307Z",
+    "updatedAt": "2025-08-03T05:35:51.307Z"
+  }
+]

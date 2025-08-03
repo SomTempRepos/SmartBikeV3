@@ -1,0 +1,268 @@
+[
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 20.8,
+      "location": {
+        "lat": 19.074777794107032,
+        "lng": 72.87536250924482
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:07:55.608Z",
+    "serverTimestamp": "2025-08-03T05:07:55.608Z",
+    "receivedAt": 1754197675608
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 20.08,
+      "location": {
+        "lat": 19.076024346722573,
+        "lng": 72.87663792287555
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:08:00.614Z",
+    "serverTimestamp": "2025-08-03T05:08:00.614Z",
+    "receivedAt": 1754197680614
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 13.92,
+      "location": {
+        "lat": 19.074182138154033,
+        "lng": 72.87530109761491
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:08:05.623Z",
+    "serverTimestamp": "2025-08-03T05:08:05.623Z",
+    "receivedAt": 1754197685623
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 14.84,
+      "location": {
+        "lat": 19.077365938704475,
+        "lng": 72.87798375109146
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:08:10.646Z",
+    "serverTimestamp": "2025-08-03T05:08:10.646Z",
+    "receivedAt": 1754197690646
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 12.26,
+      "location": {
+        "lat": 19.07616494343895,
+        "lng": 72.87831085178132
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:08:15.650Z",
+    "serverTimestamp": "2025-08-03T05:08:15.650Z",
+    "receivedAt": 1754197695650
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 14.59,
+      "location": {
+        "lat": 19.0747145902251,
+        "lng": 72.87554015539025
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:35:17.637Z",
+    "serverTimestamp": "2025-08-03T05:35:17.637Z",
+    "receivedAt": 1754199317637
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 27.1,
+      "location": {
+        "lat": 19.073684744115596,
+        "lng": 72.8766479669422
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:35:22.654Z",
+    "serverTimestamp": "2025-08-03T05:35:22.654Z",
+    "receivedAt": 1754199322654
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 26.35,
+      "location": {
+        "lat": 19.074396628252952,
+        "lng": 72.8773477548443
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:35:27.675Z",
+    "serverTimestamp": "2025-08-03T05:35:27.675Z",
+    "receivedAt": 1754199327675
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 19.17,
+      "location": {
+        "lat": 19.07352064558069,
+        "lng": 72.8759000683417
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:35:32.685Z",
+    "serverTimestamp": "2025-08-03T05:35:32.685Z",
+    "receivedAt": 1754199332685
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 19.55,
+      "location": {
+        "lat": 19.07675518248538,
+        "lng": 72.87967117935986
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T05:35:37.699Z",
+    "serverTimestamp": "2025-08-03T05:35:37.699Z",
+    "receivedAt": 1754199337699
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 12.5,
+      "location": {
+        "lat": 19.076573677423045,
+        "lng": 72.87698568884392
+      },
+      "battery": 69
+    },
+    "timestamp": "2025-08-03T05:35:42.705Z",
+    "serverTimestamp": "2025-08-03T05:35:42.705Z",
+    "receivedAt": 1754199342705
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 19.83,
+      "location": {
+        "lat": 19.078182501398185,
+        "lng": 72.88007733728726
+      },
+      "battery": 69
+    },
+    "timestamp": "2025-08-03T05:35:47.720Z",
+    "serverTimestamp": "2025-08-03T05:35:47.720Z",
+    "receivedAt": 1754199347720
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 15.58,
+      "location": {
+        "lat": 19.074841541261087,
+        "lng": 72.87977932759902
+      },
+      "battery": 69
+    },
+    "timestamp": "2025-08-03T05:35:52.737Z",
+    "serverTimestamp": "2025-08-03T05:35:52.737Z",
+    "receivedAt": 1754199352737
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 17.16,
+      "location": {
+        "lat": 19.076115104566078,
+        "lng": 72.87692533295545
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T09:34:19.395Z",
+    "serverTimestamp": "2025-08-03T09:34:19.395Z",
+    "receivedAt": 1754213659395
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 25.23,
+      "location": {
+        "lat": 19.075084862684815,
+        "lng": 72.87611376315192
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T09:34:24.400Z",
+    "serverTimestamp": "2025-08-03T09:34:24.400Z",
+    "receivedAt": 1754213664400
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 15.34,
+      "location": {
+        "lat": 19.07811542491157,
+        "lng": 72.87692690952105
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T09:34:29.402Z",
+    "serverTimestamp": "2025-08-03T09:34:29.402Z",
+    "receivedAt": 1754213669402
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 23.03,
+      "location": {
+        "lat": 19.076354253051854,
+        "lng": 72.87840348382774
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T09:34:34.409Z",
+    "serverTimestamp": "2025-08-03T09:34:34.409Z",
+    "receivedAt": 1754213674409
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 23.08,
+      "location": {
+        "lat": 19.07475640769546,
+        "lng": 72.87983070578217
+      },
+      "battery": 70
+    },
+    "timestamp": "2025-08-03T09:34:39.419Z",
+    "serverTimestamp": "2025-08-03T09:34:39.419Z",
+    "receivedAt": 1754213679419
+  },
+  {
+    "bikeId": "BIKE001",
+    "data": {
+      "avgSpeed": 17.98,
+      "location": {
+        "lat": 19.076924591391858,
+        "lng": 72.87944729870492
+      },
+      "battery": 69
+    },
+    "timestamp": "2025-08-03T09:34:44.423Z",
+    "serverTimestamp": "2025-08-03T09:34:44.423Z",
+    "receivedAt": 1754213684423
+  }
+]
