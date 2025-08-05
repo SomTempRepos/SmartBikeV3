@@ -50,16 +50,6 @@ smart-cycle-server/
 │   └── daily/
 │       └── (existing daily files)
 │
-│   ├── controllers/
-│   │   ├── authController.test.js     # Tests for auth endpoints
-│   │   ├── bikeController.test.js     # Tests for bike endpoints
-│   │   └── (other controller tests)
-│   ├── services/
-│   │   ├── authService.test.js        # Tests for auth business logic
-│   │   ├── bikeService.test.js        # Tests for bike business logic
-│   │   └── (other service tests)
-│   └── integration/
-│       └── api.test.js                # End-to-end API tests
 │
 │
 │

@@ -9,6 +9,7 @@ const guardianRoutes = require('./guardianRoutes');
 const wardRoutes = require('./wardRoutes');
 const historyRoutes = require('./historyRoutes');
 const geofencingRoutes = require('./geofenceRoutes');
+const speedLimitRoutes = require('./speedLimitRoutes');
 
 const router = express.Router();
 
@@ -19,6 +20,7 @@ router.use('/api', guardianRoutes);
 router.use('/api', wardRoutes);
 router.use('/api', historyRoutes);
 router.use('/api/geofencing', geofencingRoutes);
+router.use('/api', speedLimitRoutes);
 
 // Health check endpoint
 router.get('/health', (req, res) => {
@@ -36,7 +38,28 @@ router.get('/health', (req, res) => {
     }
   });
 });
-
+router.get('/', (req, res) => {
+  res.json({
+    message: 'Smart-Cycle Server API',
+    version: '1.0.0',
+    features: [
+      'Real-time bike tracking',
+      'Geofencing with alerts',
+      'Speed limit monitoring',
+      'WebSocket communication',
+      'Historical data storage',
+      'User authentication'
+    ],
+    endpoints: {
+      health: '/health',
+      auth: '/api/login, /api/signup',
+      bikes: '/api/bikes',
+      geofencing: '/api/geofence',
+      speedLimits: '/api/speed-limits',
+      history: '/api/history'
+    }
+  });
+});
 // Environment info endpoint (for debugging - remove in production)
 router.get('/env-info', (req, res) => {
   if (config.NODE_ENV === 'production') {

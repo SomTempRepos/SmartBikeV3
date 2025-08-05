@@ -1,29 +1,40 @@
-const SpeedLimitService = require('../services/speedLimitService');
+const speedLimitService = require('../services/speedLimitService');
 const { HTTP_STATUS } = require('../utils/constants');
 const { asyncHandler } = require('../middleware/errorHandler');
+const { logMessage } = require('../utils/helpers');
 
 class SpeedLimitController {
   /**
-   * Set speed limit for a bike
+   * Set speed limit for a specific bike
    * POST /api/bikes/:bikeId/speed-limit
    */
   static setSpeedLimit = asyncHandler(async (req, res) => {
     const { bikeId } = req.params;
-    const { speedLimit } = req.body;
+    const { speedLimit, setBy } = req.body;
 
-    const result = await SpeedLimitService.setSpeedLimit(bikeId, speedLimit);
+    logMessage('info', 'SpeedLimitController', 'setSpeedLimit', `Setting speed limit for bike ${bikeId}`, {
+      bikeId,
+      speedLimit,
+      setBy
+    });
+
+    const result = await speedLimitService.setSpeedLimit(bikeId, speedLimit, setBy);
     
     if (result.success) {
-      res.json({ 
-        message: result.message,
-        speedLimit: result.speedLimit 
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        speedLimit: result.speedLimit,
+        message: result.message
       });
     } else {
-      const statusCode = result.error.includes('required') || result.error.includes('must be') 
+      const statusCode = result.error.includes('required') || result.error.includes('Valid')
         ? HTTP_STATUS.BAD_REQUEST 
         : HTTP_STATUS.INTERNAL_SERVER_ERROR;
       
-      res.status(statusCode).json({ error: result.error });
+      res.status(statusCode).json({
+        success: false,
+        error: result.error
+      });
     }
   });
 
@@ -34,34 +45,77 @@ class SpeedLimitController {
   static getSpeedLimit = asyncHandler(async (req, res) => {
     const { bikeId } = req.params;
 
-    const result = await SpeedLimitService.getSpeedLimit(bikeId);
+    logMessage('debug', 'SpeedLimitController', 'getSpeedLimit', `Getting speed limit for bike ${bikeId}`);
+
+    const result = await speedLimitService.getSpeedLimit(bikeId);
     
     if (result.success) {
-      res.json({ speedLimit: result.speedLimit });
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        speedLimit: result.speedLimit
+      });
     } else {
-      const statusCode = result.error.includes('No speed limit') 
-        ? HTTP_STATUS.NOT_FOUND 
+      const statusCode = result.error.includes('required')
+        ? HTTP_STATUS.BAD_REQUEST 
         : HTTP_STATUS.INTERNAL_SERVER_ERROR;
       
-      res.status(statusCode).json({ error: result.error });
+      res.status(statusCode).json({
+        success: false,
+        error: result.error
+      });
     }
   });
 
   /**
-   * Get all bikes with their speed limits
-   * GET /api/bikes/speed-limits
+   * Get all speed limits
+   * GET /api/speed-limits
    */
-  static getAllBikesSpeedLimits = asyncHandler(async (req, res) => {
-    const result = await SpeedLimitService.getAllBikesSpeedLimits();
+  static getAllSpeedLimits = asyncHandler(async (req, res) => {
+    logMessage('debug', 'SpeedLimitController', 'getAllSpeedLimits', 'Getting all speed limits');
+
+    const result = await speedLimitService.getAllSpeedLimits();
     
     if (result.success) {
-      res.json({ bikes: result.bikesWithSpeedLimits });
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        speedLimits: result.speedLimits,
+        count: result.speedLimits.length
+      });
     } else {
-      const statusCode = result.error.includes('not found') 
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        error: result.error
+      });
+    }
+  });
+
+  /**
+   * Delete speed limit for a specific bike
+   * DELETE /api/bikes/:bikeId/speed-limit
+   */
+  static deleteSpeedLimit = asyncHandler(async (req, res) => {
+    const { bikeId } = req.params;
+
+    logMessage('info', 'SpeedLimitController', 'deleteSpeedLimit', `Deleting speed limit for bike ${bikeId}`);
+
+    const result = await speedLimitService.deleteSpeedLimit(bikeId);
+    
+    if (result.success) {
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        message: result.message
+      });
+    } else {
+      const statusCode = result.error.includes('not found')
         ? HTTP_STATUS.NOT_FOUND 
+        : result.error.includes('required')
+        ? HTTP_STATUS.BAD_REQUEST
         : HTTP_STATUS.INTERNAL_SERVER_ERROR;
       
-      res.status(statusCode).json({ error: result.error });
+      res.status(statusCode).json({
+        success: false,
+        error: result.error
+      });
     }
   });
 
@@ -73,133 +127,77 @@ class SpeedLimitController {
     const { bikeId } = req.params;
     const { currentSpeed } = req.body;
 
-    if (currentSpeed === undefined || currentSpeed === null) {
-      return res.status(HTTP_STATUS.BAD_REQUEST).json({ 
-        error: 'Current speed is required' 
+    logMessage('debug', 'SpeedLimitController', 'checkSpeedViolation', `Checking speed violation for bike ${bikeId}`, {
+      bikeId,
+      currentSpeed
+    });
+
+    if (typeof currentSpeed !== 'number' || currentSpeed < 0) {
+      return res.status(HTTP_STATUS.BAD_REQUEST).json({
+        success: false,
+        error: 'Valid current speed is required'
       });
     }
 
-    const result = await SpeedLimitService.checkSpeedViolation(bikeId, currentSpeed);
+    const result = await speedLimitService.checkSpeedViolation(bikeId, currentSpeed);
     
     if (result.success) {
-      res.json({ 
-        bikeId,
-        speedCheck: {
-          isExceeded: result.isExceeded,
-          speedLimit: result.speedLimit,
-          currentSpeed: result.currentSpeed,
-          exceedBy: result.exceedBy,
-          reason: result.reason
-        }
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        isExceeded: result.isExceeded,
+        speedLimit: result.speedLimit,
+        currentSpeed: result.currentSpeed,
+        violation: result.violation
       });
     } else {
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: result.error });
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        error: result.error
+      });
     }
   });
 
   /**
-   * Get speed violations for a bike
-   * GET /api/bikes/:bikeId/speed-violations
+   * Get speed limits for multiple bikes
+   * POST /api/speed-limits/bulk
    */
-  static getSpeedViolations = asyncHandler(async (req, res) => {
-    const { bikeId } = req.params;
-    const { limit } = req.query;
+  static getSpeedLimitsForBikes = asyncHandler(async (req, res) => {
+    const { bikeIds } = req.body;
 
-    const result = await SpeedLimitService.getSpeedViolations(
-      bikeId, 
-      limit ? parseInt(limit, 10) : 50
-    );
+    logMessage('debug', 'SpeedLimitController', 'getSpeedLimitsForBikes', `Getting speed limits for multiple bikes`, {
+      count: bikeIds?.length
+    });
+
+    if (!Array.isArray(bikeIds) || bikeIds.length === 0) {
+      return res.status(HTTP_STATUS.BAD_REQUEST).json({
+        success: false,
+        error: 'Array of bike IDs is required'
+      });
+    }
+
+    const result = await speedLimitService.getSpeedLimitsForBikes(bikeIds);
     
     if (result.success) {
-      res.json({ 
-        bikeId,
-        violations: result.violations,
-        count: result.violations.length
+      res.status(HTTP_STATUS.OK).json({
+        success: true,
+        speedLimits: result.speedLimits,
+        count: Object.keys(result.speedLimits).length
       });
     } else {
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: result.error });
+      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+        success: false,
+        error: result.error
+      });
     }
   });
 
   /**
-   * Get speed limit history for a bike
-   * GET /api/bikes/:bikeId/speed-limit-history
+   * Update speed limit (alias for setSpeedLimit)
+   * PUT /api/bikes/:bikeId/speed-limit
    */
-  static getSpeedLimitHistory = asyncHandler(async (req, res) => {
-    const { bikeId } = req.params;
-    const { limit } = req.query;
-
-    const result = await SpeedLimitService.getSpeedLimitHistory(
-      bikeId, 
-      limit ? parseInt(limit, 10) : 50
-    );
-    
-    if (result.success) {
-      res.json({ 
-        bikeId,
-        history: result.history,
-        count: result.history.length
-      });
-    } else {
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ error: result.error });
-    }
-  });
-
-  /**
-   * Remove speed limit for a bike
-   * DELETE /api/bikes/:bikeId/speed-limit
-   */
-  static removeSpeedLimit = asyncHandler(async (req, res) => {
-    const { bikeId } = req.params;
-
-    const result = await SpeedLimitService.removeSpeedLimit(bikeId);
-    
-    if (result.success) {
-      res.json({ message: result.message });
-    } else {
-      const statusCode = result.error.includes('not found') 
-        ? HTTP_STATUS.NOT_FOUND 
-        : HTTP_STATUS.INTERNAL_SERVER_ERROR;
-      
-      res.status(statusCode).json({ error: result.error });
-    }
-  });
-
-  /**
-   * Get speed violations summary for all bikes
-   * GET /api/speed-violations/summary
-   */
-  static getSpeedViolationsSummary = asyncHandler(async (req, res) => {
-    try {
-      const bikesResult = await SpeedLimitService.getAllBikesSpeedLimits();
-      
-      if (!bikesResult.success) {
-        return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ 
-          error: bikesResult.error 
-        });
-      }
-
-      const bikes = bikesResult.bikesWithSpeedLimits;
-      const summary = {
-        totalBikes: bikes.length,
-        bikesWithSpeedLimits: bikes.filter(b => b.speedLimit !== null).length,
-        bikesWithoutSpeedLimits: bikes.filter(b => b.speedLimit === null).length,
-        currentViolations: bikes.filter(b => b.isSpeedExceeded).length,
-        activeBikes: bikes.filter(b => b.status === 'active').length,
-        violations: bikes.filter(b => b.isSpeedExceeded).map(bike => ({
-          bikeId: bike.bikeId,
-          currentSpeed: bike.currentSpeed,
-          speedLimit: bike.speedLimit,
-          exceedBy: Math.round((bike.currentSpeed - bike.speedLimit) * 100) / 100
-        }))
-      };
-
-      res.json({ summary });
-    } catch (error) {
-      res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({ 
-        error: 'Error generating speed violations summary' 
-      });
-    }
+  static updateSpeedLimit = asyncHandler(async (req, res) => {
+    // Use the same logic as setSpeedLimit
+    await SpeedLimitController.setSpeedLimit(req, res);
   });
 }
 

@@ -1,4 +1,4 @@
-// FourCrads.tsx
+// FourCards.tsx
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 import {
@@ -40,6 +40,13 @@ interface LocationHistory {
   timestamp: string;
 }
 
+interface SpeedLimitData {
+  bikeId: string;
+  speedLimit: number;
+  setAt: string;
+  setBy: string;
+}
+
 // Function to calculate distance between two points using Haversine formula
 function calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371; // Earth's radius in kilometers
@@ -66,8 +73,11 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
   });
   const [distanceFromBase, setDistanceFromBase] = useState<number>(0);
   const [speedLimit, setSpeedLimit] = useState<number>(50); // Default speed limit
+  const [isSettingSpeedLimit, setIsSettingSpeedLimit] = useState<boolean>(false);
+  const [speedLimitStatus, setSpeedLimitStatus] = useState<string>('');
   
   const SOCKET_SERVER_URL = import.meta.env.VITE_SOCKET_SERVER_URL;
+  const API_BASE_URL = import.meta.env.VITE_SPEED_LIMIT_UR || 'http://localhost:3001/api';
 
   const titles = cardTitles || [
     "Current Speed",
@@ -75,6 +85,80 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
     "Battery",
     "Distance from Base"
   ];
+
+  // Get the current bike ID (you might get this from props, context, or URL params)
+  const currentBikeId = "BIKE001"; // This should come from your app state
+
+  // Fetch current speed limit on component mount
+  useEffect(() => {
+    fetchCurrentSpeedLimit();
+  }, [currentBikeId]);
+
+  // Fetch current speed limit from server
+  const fetchCurrentSpeedLimit = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/bikes/${currentBikeId}/speed-limit`);
+      const data = await response.json();
+      
+      if (data.success && data.speedLimit) {
+        setSpeedLimit(data.speedLimit.speedLimit);
+        console.log('Loaded speed limit:', data.speedLimit.speedLimit);
+      }
+    } catch (error) {
+      console.error('Error fetching speed limit:', error);
+    }
+  };
+
+  // Send speed limit to server
+  const handleSetSpeedLimit = async () => {
+    if (!currentBikeId || isSettingSpeedLimit) return;
+
+    setIsSettingSpeedLimit(true);
+    setSpeedLimitStatus('Setting...');
+
+    try {
+      const response = await fetch(`${API_BASE_URL}/bikes/${currentBikeId}/speed-limit`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          speedLimit: speedLimit,
+          setBy: 'user' // or get from user context
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSpeedLimitStatus('✅ Speed limit set successfully!');
+        console.log('Speed limit set successfully:', data);
+        
+        // Clear success message after 3 seconds
+        setTimeout(() => {
+          setSpeedLimitStatus('');
+        }, 3000);
+      } else {
+        setSpeedLimitStatus('❌ Failed to set speed limit');
+        console.error('Failed to set speed limit:', data.error);
+        
+        // Clear error message after 5 seconds
+        setTimeout(() => {
+          setSpeedLimitStatus('');
+        }, 5000);
+      }
+    } catch (error) {
+      setSpeedLimitStatus('❌ Network error');
+      console.error('Error setting speed limit:', error);
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setSpeedLimitStatus('');
+      }, 5000);
+    } finally {
+      setIsSettingSpeedLimit(false);
+    }
+  };
 
   useEffect(() => {
     let newSocket: Socket | null = null;
@@ -105,6 +189,20 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
         console.error("Socket connection error:", error);
         setIsConnected(false);
         setError(`Connection error: ${error.message}`);
+      });
+
+      // Listen for speed limit updates from server
+      newSocket.on("speedLimitUpdated", (data: { bikeId: string; speedLimit: number; setAt: string }) => {
+        console.log("Speed limit updated via WebSocket:", data);
+        if (data.bikeId === currentBikeId) {
+          setSpeedLimit(data.speedLimit);
+          setSpeedLimitStatus(`✅ Speed limit updated to ${data.speedLimit} km/h`);
+          
+          // Clear status after 3 seconds
+          setTimeout(() => {
+            setSpeedLimitStatus('');
+          }, 3000);
+        }
       });
 
       newSocket.on("bikeData", (data: BikeData) => {
@@ -173,7 +271,7 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
         newSocket.close();
       }
     };
-  }, [baseLocation]);
+  }, [baseLocation, currentBikeId]);
 
   const formatSpeed = (speed: number) => {
     return `${speed.toFixed(1)} km/h`;
@@ -204,8 +302,6 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
 
   return (
     <div className="space-y-4">
-      
-
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {error && (
@@ -255,32 +351,49 @@ export default function LiveBikeStats({ cardTitles }: LiveBikeStatsProps) {
                     step="1"
                     value={speedLimit}
                     onChange={handleSpeedLimitChange}
-                    className="w-flex px-2 py-2 text-sm border border-gray-300 rounded-md dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    disabled={isSettingSpeedLimit}
+                    className="w-flex px-2 py-2 text-sm border border-gray-300 rounded-md dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
                     placeholder="50"
                   />
                   <button
-                    onClick={() => {
-                      // You can add any additional logic here if needed
-                      console.log('Speed limit set to:', speedLimit);
-                    }}
-                    className="flex items-center justify-center w-6 h-6 rounded-md bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1"
+                    onClick={handleSetSpeedLimit}
+                    disabled={isSettingSpeedLimit}
+                    className="flex items-center justify-center w-6 h-6 rounded-md bg-blue-500 hover:bg-blue-600 text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed"
                     title="Set Speed Limit"
                   >
-                    <svg 
-                      className="w-3 h-3" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth={2.5} 
-                        d="M5 13l4 4L19 7" 
-                      />
-                    </svg>
+                    {isSettingSpeedLimit ? (
+                      <div className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                      <svg 
+                        className="w-3 h-3" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth={2.5} 
+                          d="M5 13l4 4L19 7" 
+                        />
+                      </svg>
+                    )}
                   </button>
                 </div>
+                
+                {/* Status Messages */}
+                {speedLimitStatus && (
+                  <div className="mt-2 text-xs font-medium">
+                    <span className={
+                      speedLimitStatus.includes('✅') ? 'text-green-600' :
+                      speedLimitStatus.includes('❌') ? 'text-red-500' :
+                      'text-blue-500'
+                    }>
+                      {speedLimitStatus}
+                    </span>
+                  </div>
+                )}
+                
                 {isSpeedExceeded && (
                   <div className="mt-2 text-xs text-red-500 font-medium">
                     ⚠️ Speed limit exceeded!

@@ -1,17 +1,20 @@
 [
   {
     "bikeId": "BIKE001",
-    "lastSeen": "2025-08-03T09:34:44.438Z",
+    "lastSeen": "2025-08-05T05:36:45.146Z",
     "currentLocation": {
-      "lat": 19.076924591391858,
-      "lng": 72.87944729870492
+      "lat": 19.076135777059672,
+      "lng": 72.87837824015689
     },
-    "avgSpeed": 17.98,
+    "avgSpeed": 17.95,
     "batteryLevel": 69,
     "createdAt": "2025-07-07T18:21:20.380Z",
     "status": "active",
     "isOutsideFence": false,
-    "distanceFromBase": 0.3663522794529464,
-    "geofenceId": "fence_1754199351307"
+    "distanceFromBase": 0.5047976413794596,
+    "geofenceId": "fence_1754199351307",
+    "speedLimit": 25,
+    "isSpeedExceeded": false,
+    "lastSpeedViolation": null
   }
 ]

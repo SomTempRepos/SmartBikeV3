@@ -6,7 +6,6 @@ const initializeDirectories = async () => {
   try {
     await fs.ensureDir(config.DATA_DIR);
     await fs.ensureDir(config.DAILY_DIR);
-    console.log('✅ Data directories initialized');
   } catch (error) {
     console.error('❌ Error initializing directories:', error);
     throw error;
